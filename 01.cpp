@@ -30,7 +30,7 @@ int main()
     ss >> c1[i];
     r_counts[c1[i]]++;
 
-    std::cout << c0[i] << " " << c1[i] << std::endl;
+    //std::cout << c0[i] << " " << c1[i] << std::endl;
     i++;
   }
 
