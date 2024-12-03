@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-std::vector<int> has_1_mountain_or_valley(const std::vector<int> &vals);
+std::vector<int> dampen_sort(const std::vector<int> &vals);
 bool dampen_diff(const std::vector<int> &vals);
 bool check_diffs(const std::vector<int> &vals);
 
@@ -34,53 +34,21 @@ int main() {
     if (std::is_sorted(row.begin(), row.end()) ||
         std::is_sorted(row.rbegin(), row.rend())) {
       sorted_rows.push_back(row);
-
-      for (auto v : row) {
-        std::cout << v << " ";
-      }
-
-      std::cout << std::endl;
     } else {
-      auto vec = has_1_mountain_or_valley(row);
+      auto vec = dampen_sort(row);
 
-      if (vec.size() == 0) {
-        std::cout << "too many errors: ";
-        for (auto v : row) {
-          std::cout << v << " ";
-        }
-        std::cout << std::endl;
-      } else {
-        std::cout << "1 error: " << " : ";
+      if (vec.size() != 0) {
         dampened_rows.push_back(vec);
-        for (auto v : row) {
-          std::cout << v << " ";
-        }
-
-        std::cout << ":TO:";
-
-        for (auto v : vec) {
-          std::cout << v << " ";
-        }
-
-        std::cout << std::endl;
       }
     }
   }
 
   int good_diffs = sorted_rows.size() + dampened_rows.size();
-  std:: cout << sorted_rows.size() << " " << dampened_rows.size() << std::endl;
 
   for (const auto &row : sorted_rows) {
-    if(!check_diffs(row) &&!dampen_diff(row))
+    if(!check_diffs(row) && !dampen_diff(row))
     {
       good_diffs--;
-
-      std::cout << "---BAD---" << std::endl;
-      for (auto v : row) {
-          std::cout << v << " ";
-        }
-
-        std::cout << "------" << std::endl;
     }
   }
 
@@ -117,7 +85,7 @@ bool dampen_diff(const std::vector<int> &vals)
   return false;
 }
 
-std::vector<int> has_1_mountain_or_valley(const std::vector<int> &vals) {
+std::vector<int> dampen_sort(const std::vector<int> &vals) {
   
   for (int i = 0; i < vals.size(); i++) {
     std::vector<int> new_vec(vals);
