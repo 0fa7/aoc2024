@@ -1,11 +1,9 @@
-#include <algorithm>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <regex>
 #include <sstream>
 #include <string>
-#include <vector>
 
 int main() {
   std::ifstream input("../03_input.txt");
@@ -23,7 +21,6 @@ int main() {
     instructions.append(line);
   }
 
-  std::vector<std::string> do_substrs;
   bool search_for_dont = true;
   std::string do_str = "do()";
   std::string dont_str = "don't()";
@@ -35,7 +32,7 @@ int main() {
       r = instructions.find(dont_str, l);
       std::cout << instructions.substr(l, r - l) << std::endl;
       std::string substr = instructions.substr(l, r - l);
-      
+
       auto words_begin = std::sregex_iterator(substr.begin(),
                                               substr.end(), mul_pattern);
       auto words_end = std::sregex_iterator();
